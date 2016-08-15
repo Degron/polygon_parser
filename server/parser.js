@@ -15,7 +15,7 @@ r.connect(config.rethinkdb, function (err, conn) {
 })
 
 var getStream = function () {
-    var jsonData = __dirname +'/test.json',
+    var jsonData = '../../zcta5.json',
         stream = fs.createReadStream(jsonData, { encoding: 'utf8' }),
         parser = JSONStream.parse([true, {emitKey: true}]);
     return stream.pipe(parser);
