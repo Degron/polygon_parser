@@ -48,8 +48,8 @@ function startParsing(_rdbConn) {
 
 
             // meow = {}
-            // var zip_code = data.value.properties.ZCTA5CE10
-            // var polygon = [[latitude.max(), longitude.min()], [latitude.max(), longitude.max()], [latitude.min(), longitude.max()], [latitude.min(), longitude.min()], [latitude.max(), longitude.min()]]
+            var zip_code = data.value.properties.ZCTA5CE10
+            var polygon = [[latitude.max(), longitude.min()], [latitude.max(), longitude.max()], [latitude.min(), longitude.max()], [latitude.min(), longitude.min()], [latitude.max(), longitude.min()]]
             // meow[zip_code] = polygon
 
             try {
