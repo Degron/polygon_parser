@@ -28,7 +28,8 @@ function startParsing(_rdbConn) {
         var latitude = []
         var longitude = []
         console.log(data.value.properties.ZCTA5CE10)
-        console.log(data.value.geometry.coordinates)
+        console.log(data.value.geometry.type)
+        // console.log(data.value.geometry.coordinates)
         if (data.value.geometry.type === 'Polygon') {
             data.value.geometry.coordinates.forEach(function (item) {
                 latitude.push(item[0])
