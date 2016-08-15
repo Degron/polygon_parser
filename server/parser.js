@@ -27,7 +27,7 @@ function startParsing(_rdbConn) {
 
         var latitude = []
         var longitude = []
-        // console.log(data.value.properties.ZCTA5CE10)
+        console.log(data.value.properties.ZCTA5CE10)
         // console.log(data.value.geometry.type)
         // console.log(data.value.geometry.coordinates)
         if (data.value.geometry.type === 'Polygon') {
@@ -47,20 +47,22 @@ function startParsing(_rdbConn) {
         }
 
 
-            // meow = {}
-            var zip_code = data.value.properties.ZCTA5CE10
-            var polygon = [[latitude.max(), longitude.min()], [latitude.max(), longitude.max()], [latitude.min(), longitude.max()], [latitude.min(), longitude.min()], [latitude.max(), longitude.min()]]
-            // meow[zip_code] = polygon
+        // meow = {}
+        var zip_code = data.value.properties.ZCTA5CE10
+        var polygon = [[latitude.max(), longitude.min()], [latitude.max(), longitude.max()], [latitude.min(), longitude.max()], [latitude.min(), longitude.min()], [latitude.max(), longitude.min()]]
+        // meow[zip_code] = polygon
 
-            try {
-                var result = r.table('zip_code_polygon').insert({ 'id': zip_code, 'polygon': polygon }, { returnChanges: true }).run(_rdbConn);
-            }
-            catch (e) {
-                console.log(e)
-            }
+        try {
+            var result = r.table('zip_code_polygon').insert({ 'id': zip_code, 'polygon': polygon }, { returnChanges: true }).run(_rdbConn);
         }
-
-    )
+        catch (e) {
+            console.log(e)
+        }
+    })
+    
+    getStream().on('end', function () {
+        console.log('end');
+    });
 
 }
 
