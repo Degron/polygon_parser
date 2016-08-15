@@ -16,6 +16,7 @@ r.connect(config.rethinkdb, function (err, conn) {
 
 var getStream = function () {
     var jsonData = '../../zcta5.json',
+    // var jsonData = __dirname +'/test.json',
         stream = fs.createReadStream(jsonData, { encoding: 'utf8' }),
         parser = JSONStream.parse([true, {emitKey: true}]);
     return stream.pipe(parser);
@@ -27,6 +28,7 @@ function startParsing(_rdbConn) {
         var latitude = []
         var longitude = []
         console.log(data.value.properties.ZCTA5CE10)
+        console.log(data.value.geometry.coordinates)
 
         data.value.geometry.coordinates.forEach(function (item) {
             latitude.push(item[0])
@@ -37,7 +39,7 @@ function startParsing(_rdbConn) {
         var zip_code = data.value.properties.ZCTA5CE10
         var polygon = [[latitude.max(), longitude.min()], [latitude.max(), longitude.max()], [latitude.min(), longitude.max()], [latitude.min(), longitude.min()], [latitude.max(), longitude.min()]]
         meow[zip_code] = polygon
-        console.log(meow)
+        // console.log(meow)
         try {
             // var todo = yield parse(this);
             // todo.createdAt = r.now(); // Set the field `createdAt` to the current time
