@@ -1,0 +1,11 @@
+{
+  "name": "parser",
+  "version": "0.0.1",
+  "description": "server side for suiteShare app",
+  "dependencies": {
+    "JSONStream": "^1.1.4",
+    "event-stream": "^3.3.4",
+    "rethinkdb": "^2.3.2",
+    "sugar": "^2.0.1"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+         [46.749722, -68.304901],
+[46.749722, -68.047088],
+[46.55722, -68.047088],
+[46.55722, -68.304901],
+[46.749722, -68.304901]
+
+          ]
+        ]
+      },
+      "properties": {
+        "ZCTA5CE10": "04758",
+        "GEOID10": "04758",
+        "CLASSFP10": "B5",
+        "MTFCC10": "G6350",
+        "FUNCSTAT10": "S",
+        "ALAND10": 91006829,
+        "AWATER10": 191946,
+        "INTPTLAT10": "+46.5592719",
+        "INTPTLON10": "-067.8532254"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [0,0]
+          ]
+        ]
+      },
+      "properties": {
+        "ZCTA5CE10": "04758",
+        "GEOID10": "04758",
+        "CLASSFP10": "B5",
+        "MTFCC10": "G6350",
+        "FUNCSTAT10": "S",
+        "ALAND10": 91006829,
+        "AWATER10": 191946,
+        "INTPTLAT10": "+46.5592719",
+        "INTPTLON10": "-067.8532254"
+      }
+    }
+  ]
+}
