@@ -27,35 +27,40 @@ function startParsing(_rdbConn) {
 
         var latitude = []
         var longitude = []
-        console.log(data.value.properties.ZCTA5CE10)
-        console.log(data.value.geometry.type)
+        // console.log(data.value.properties.ZCTA5CE10)
+        // console.log(data.value.geometry.type)
         // console.log(data.value.geometry.coordinates)
         if (data.value.geometry.type === 'Polygon') {
             data.value.geometry.coordinates.forEach(function (item) {
                 latitude.push(item[0])
                 longitude.push(item[1])
             })
+        }
+        else {
+            data.value.geometry.coordinates.forEach(function (element) {
+                element.forEach(function (item) {
+                    latitude.push(item[0])
+                    longitude.push(item[1])
+                })
+            })
 
-            meow = {}
-            var zip_code = data.value.properties.ZCTA5CE10
-            var polygon = [[latitude.max(), longitude.min()], [latitude.max(), longitude.max()], [latitude.min(), longitude.max()], [latitude.min(), longitude.min()], [latitude.max(), longitude.min()]]
-            meow[zip_code] = polygon
+        }
+
+
+            // meow = {}
+            // var zip_code = data.value.properties.ZCTA5CE10
+            // var polygon = [[latitude.max(), longitude.min()], [latitude.max(), longitude.max()], [latitude.min(), longitude.max()], [latitude.min(), longitude.min()], [latitude.max(), longitude.min()]]
+            // meow[zip_code] = polygon
 
             try {
-                // var todo = yield parse(this);
-                // todo.createdAt = r.now(); // Set the field `createdAt` to the current time
-                var result = r.table('zip_code_polygon').insert({ 'zip_code': zip_code, 'polygon': polygon }, { returnChanges: true }).run(_rdbConn);
-
-                // todo = result.changes[0].new_val; // todo now contains the previous todo + a field `id` and `createdAt`
-                // this.body = JSON.stringify(todo);
+                var result = r.table('zip_code_polygon').insert({ 'id': zip_code, 'polygon': polygon }, { returnChanges: true }).run(_rdbConn);
             }
             catch (e) {
-                // this.status = 500;
-                // this.body = e.message || http.STATUS_CODES[this.status];
+                console.log(e)
             }
         }
 
-    })
+    )
 
 }
 
