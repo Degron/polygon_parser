@@ -15,8 +15,8 @@ r.connect(config.rethinkdb, function (err, conn) {
 })
 
 var getStream = function () {
-    var jsonData = '../../zcta5.json',
-        // var jsonData = __dirname +'/test.json',
+    // var jsonData = '../../zcta5.json',
+        var jsonData = __dirname +'/test.json',
         stream = fs.createReadStream(jsonData, { encoding: 'utf8' }),
         parser = JSONStream.parse([true, { emitKey: true }]);
     return stream.pipe(parser);
@@ -32,28 +32,32 @@ function startParsing(_rdbConn) {
         // console.log(data.value.geometry.coordinates)
         if (data.value.geometry.type === 'Polygon') {
             data.value.geometry.coordinates.forEach(function (item) {
-                latitude.push(item[0])
-                longitude.push(item[1])
+                item.forEach(function (n) {
+                    latitude.push(n[0])
+                    longitude.push(n[1])
+                })
             })
         }
         else {
             data.value.geometry.coordinates.forEach(function (element) {
                 element.forEach(function (item) {
-                    latitude.push(item[0])
-                    longitude.push(item[1])
+                    item.forEach(function (n) {
+                        latitude.push(n[0])
+                        longitude.push(n[1])
+                    })
                 })
             })
 
         }
 
 
-        // meow = {}
+        var polygon = ''
         var zip_code = data.value.properties.ZCTA5CE10
-        var polygon =   latitude.max() + ' ' + longitude.min() + ',' + 
-                        latitude.max() + ' ' + longitude.max() + ',' + 
-                        latitude.min() + ' ' + longitude.max() + ',' + 
-                        latitude.min() + ' ' + longitude.min() + ',' + 
-                        latitude.max() + ' ' + longitude.min()
+        polygon = latitude.max() + ' ' + longitude.min() + ',' + 
+                  latitude.max() + ' ' + longitude.max() + ',' + 
+                  latitude.min() + ' ' + longitude.max() + ',' + 
+                  latitude.min() + ' ' + longitude.min() + ',' + 
+                  latitude.max() + ' ' + longitude.min()
         
         try {
             var result = r.table('zip_code_polygon').insert({ 'id': zip_code, 'polygon': polygon }, { returnChanges: true }).run(_rdbConn);
